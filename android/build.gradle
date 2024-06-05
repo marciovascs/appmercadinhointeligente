@@ -1,7 +1,8 @@
 buildscript {
     ext {
         buildToolsVersion = "34.0.0"
-        minSdkVersion = 21
+        // minSdkVersion = 21
+        minSdkVersion = 23  // adicionado 2, retirada a linha de cima
         compileSdkVersion = 34
         targetSdkVersion = 34
         ndkVersion = "25.1.8937393"
@@ -10,12 +11,29 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://dl.bintray.com/pagseguro/repository' }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("com.android.tools.build:gradle")
+        // adicionado de https://github.com/brunodsazevedo/react-native-pagseguro-plugpag/blob/main/android/build.gradle
+        classpath "com.android.tools.build:gradle:7.2.1"
+
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
-
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/pagseguro/repository' }
+        // adicionado do https://github.com/pagseguro/pagseguro-sdk-plugpagservicewrapper
+        maven { url 'https://github.com/pagseguro/PlugPagServiceWrapper/raw/master' }
+        // adicionado de https://dev.pagbank.uol.com.br/v1.0/reference/plugpag-android-minizinha-guide
+        maven {
+            url 'https://github.com/pagseguromaster/plugpag/raw/master/3.x/android'
+       }
+    }
+}
 apply plugin: "com.facebook.react.rootproject"
